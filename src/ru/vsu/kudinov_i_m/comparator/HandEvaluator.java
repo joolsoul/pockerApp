@@ -49,7 +49,7 @@ public class HandEvaluator
     {
         cards = new ArrayList<>();
         cards.addAll(gameHand.getCards());
-        cards.addAll(player.getHand());
+        cards.addAll(player.getPlayerHand());
     }
 
     private void sort()
@@ -304,16 +304,15 @@ public class HandEvaluator
     public void isFullHouse()
     {
         valueOfCombination.clear();
-        int counter = 0;
+        int counterOfPairs = 0;
         int rank2cards = 0;
         int rank3cards = 0;
         int rank4cards = 0;
         for (Map.Entry<Integer, Integer> entry : ranksMap.entrySet())
         {
-
             if(entry.getValue() == 2)
             {
-                counter++;
+                counterOfPairs++;
                 if(rank2cards < entry.getKey())
                 {
                     rank2cards = entry.getKey();
@@ -333,7 +332,7 @@ public class HandEvaluator
             }
         }
 
-        if(counter == 2 && ranksMap.containsValue(3))
+        if(counterOfPairs == 2 && ranksMap.containsValue(3))
         {
             valueOfCombination.add(rank2cards);
             currentCombination = Combination.FullHouse;
@@ -391,7 +390,7 @@ public class HandEvaluator
     public void isRoyalFlush()
     {
         valueOfCombination.clear();
-        int counter = 0;
+        int valueOfSuitCombinationCard = 0;
         char suitCombination = ' ';
         if(ranksMap.containsKey(14) && ranksMap.containsKey(13) && ranksMap.containsKey(12) && ranksMap.containsKey(11) && ranksMap.containsKey(10))
         {
@@ -399,33 +398,32 @@ public class HandEvaluator
             {
                 if(entry.getKey() > 9 && entry.getValue() == 1)
                 {
-                    counter = entry.getKey();
+                    valueOfSuitCombinationCard = entry.getKey();
                 }
             }
         }
-        if(counter != 0)
+        if(valueOfSuitCombinationCard != 0)
         {
             for (Card card : cards)
             {
-                if(card.getValue() == counter)
+                if(card.getValue() == valueOfSuitCombinationCard)
                 {
                     suitCombination = card.getSuit();
                 }
             }
         }
-        int counter2 = 0;
+        int counterSuitCombination = 0;
         for (Card card : cards)
         {
             if(card.getValue() > 9 && card.getSuit() == suitCombination)
             {
-                counter2++;
+                counterSuitCombination++;
             }
         }
-        if(counter2 > 4)
+        if(counterSuitCombination > 4)
         {
             currentCombination = Combination.RoyalFlush;
         }
         player.setCurrentCombination(currentCombination);
-        player.setValueOfCombination(valueOfCombination);
     }
 }

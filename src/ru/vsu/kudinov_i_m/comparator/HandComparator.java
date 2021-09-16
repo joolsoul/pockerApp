@@ -15,6 +15,11 @@ public class HandComparator implements Comparator<Player>
         Combination combination1 = player1.getCurrentCombination();
         Combination combination2 = player2.getCurrentCombination();
 
+        if(combination1 == Combination.RoyalFlush && combination2 == Combination.RoyalFlush)
+        {
+            return 0;
+        }
+
         if(combination1 == combination2)
         {
             List<Integer> values1 = player1.getValueOfCombination();

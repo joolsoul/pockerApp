@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Player
 {
-    private List<Card> hand;
-    private int balance;
-    private int bet;
+    private List<Card> playerHand;
+    private int currentBalance;
+    private int currentBet;
 
     private Combination currentCombination;
     private List<Integer> valueOfCombination;
@@ -24,59 +24,59 @@ public class Player
 
     public Player(Card firstCard, Card secondCard, int balance)
     {
-        this.hand = new ArrayList<>();
-        hand.add(firstCard);
-        hand.add(secondCard);
-        this.balance = balance;
+        this.playerHand = new ArrayList<>();
+        playerHand.add(firstCard);
+        playerHand.add(secondCard);
+        this.currentBalance = balance;
     }
 
     public Player(Card firstCard, Card secondCard)
     {
-        this.hand = new ArrayList<>();
-        hand.add(firstCard);
-        hand.add(secondCard);
+        this.playerHand = new ArrayList<>();
+        playerHand.add(firstCard);
+        playerHand.add(secondCard);
     }
 
     public Player(int balance)
     {
-        this.balance = balance;
+        this.currentBalance = balance;
     }
 
     public void setHand(Card firstCard, Card secondCard)
     {
-        this.hand = new ArrayList<>();
-        hand.add(firstCard);
-        hand.add(secondCard);
+        this.playerHand = new ArrayList<>();
+        playerHand.add(firstCard);
+        playerHand.add(secondCard);
     }
 
-    public void setBalance(int balance)
+    public void setCurrentBalance(int currentBalance)
     {
-        this.balance = balance;
+        this.currentBalance = currentBalance;
     }
 
-    public List<Card> getHand()
+    public List<Card> getPlayerHand()
     {
-        return hand;
+        return playerHand;
     }
 
-    public int getBalance()
+    public int getCurrentBalance()
     {
-        return balance;
+        return currentBalance;
     }
 
     public void showCards()
     {
-        System.out.println(hand.toString());
+        System.out.println(playerHand.toString());
     }
 
-    public int getBet()
+    public int getCurrentBet()
     {
-        return bet;
+        return currentBet;
     }
 
-    public void setBet(int bet)
+    public void setCurrentBet(int currentBet)
     {
-        this.bet = bet;
+        this.currentBet = currentBet;
     }
 
     public boolean isPassed()
@@ -86,13 +86,13 @@ public class Player
 
     public int makeBet()
     {
-        balance -= bet;
-        return bet;
+        currentBalance -= currentBet;
+        return currentBet;
     }
 
     public void raiseBet(int numbers)
     {
-        bet += numbers;
+        currentBet += numbers;
     }
 
     public void setPassed()
@@ -109,7 +109,7 @@ public class Player
     {
         isChecked = false;
         isPassed = false;
-        bet = 0;
+        currentBet = 0;
     }
 
     public Combination getCurrentCombination()

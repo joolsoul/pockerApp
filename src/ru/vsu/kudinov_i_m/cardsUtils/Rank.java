@@ -16,10 +16,11 @@ public enum Rank
     King("K", 13),
     Ace("A", 14);
 
-   private String rank;
+    private String rank;
     private int value;
 
-    Rank(String rank, int value) {
+    Rank(String rank, int value)
+    {
         this.rank = rank;
         this.value = value;
     }
